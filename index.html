@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InterviewGPT – AI Assistant for Interview Preparation</title>
+
+    <!-- Google Fonts -->
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Animated background + floating shapes -->
+    <div class="bg-layer">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <!-- App shell -->
+    <div class="app-shell">
+      <!-- Sidebar navigation -->
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <div class="logo-pill">
+            <span class="logo-mark">IG</span>
+          </div>
+          <div class="brand-copy">
+            <span class="brand-title">InterviewGPT</span>
+            <span class="brand-subtitle">AI Interview Prep</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <button
+            class="sidebar-item active"
+            data-nav-target="dashboard"
+          >
+            <i class="fa-solid fa-sparkles"></i>
+            <span>Dashboard</span>
+          </button>
+          <button class="sidebar-item" data-nav-target="resume">
+            <i class="fa-regular fa-file-lines"></i>
+            <span>Upload Resume</span>
+          </button>
+          <button class="sidebar-item" data-nav-target="practice">
+            <i class="fa-regular fa-comments"></i>
+            <span>Interview Practice</span>
+          </button>
+          <button class="sidebar-item" data-nav-target="feedback">
+            <i class="fa-regular fa-lightbulb"></i>
+            <span>Feedback</span>
+          </button>
+          <button class="sidebar-item" data-nav-target="progress">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Progress</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="mini-pill online">
+            <span class="dot"></span>
+            <span>AI Online</span>
+          </div>
+          <small class="sidebar-hint">Practice smarter, not harder.</small>
+        </div>
+      </aside>
+
+      <!-- Main panel -->
+      <main class="main-panel">
+        <!-- Top bar -->
+        <header class="top-bar">
+          <div class="top-bar-left">
+            <span class="top-badge">New</span>
+            <span class="top-title">Your AI assistant for interview preparation</span>
+          </div>
+          <div class="top-bar-right">
+            <button class="top-icon-btn" aria-label="Notifications">
+              <i class="fa-regular fa-bell"></i>
+            </button>
+            <button class="top-user">
+              <div class="avatar">JD</div>
+              <span class="top-user-name">Guest</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          </div>
+        </header>
+
+        <!-- Sections wrapper -->
+        <div class="sections">
+          <!-- 1. Landing / dashboard section -->
+          <section
+            id="section-dashboard"
+            class="section active-section"
+          >
+            <div class="hero-grid">
+              <!-- Hero copy -->
+              <div class="hero-content">
+                <div class="hero-chip">
+                  <i class="fa-solid fa-sparkles"></i>
+                  <span>InterviewGPT</span>
+                </div>
+                <h1>
+                  Your AI assistant for
+                  <span class="gradient-text">interview preparation</span>
+                </h1>
+                <p class="hero-subtitle">
+                  Practice realistic interview questions, refine your answers,
+                  and get instant AI feedback on your communication, confidence,
+                  and technical depth.
+                </p>
+                <div class="hero-actions">
+                  <button id="get-started-btn" class="btn primary-btn">
+                    <span>Get Started</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
+                  <button class="btn ghost-btn" data-nav-target="practice">
+                    <i class="fa-regular fa-circle-play"></i>
+                    <span>Try a practice round</span>
+                  </button>
+                </div>
+
+                <div class="hero-meta">
+                  <div>
+                    <span class="meta-label">AI Question Generator</span>
+                    <span class="meta-value">Behavioral & technical</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Smart Feedback</span>
+                    <span class="meta-value">Instant insights</span>
+                  </div>
+                  <div>
+                    <span class="meta-label">Readiness Tracking</span>
+                    <span class="meta-value">Visual progress</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Auth + preview card -->
+              <div class="hero-side">
+                <!-- Auth card -->
+                <section class="glass-card auth-card" id="auth-section">
+                  <header class="card-header">
+                    <h2>Sign in to start practicing</h2>
+                    <p class="card-subtitle">
+                      Create a free account or continue as a demo user.
+                    </p>
+                  </header>
+                  <form id="auth-form" class="form-grid">
+                    <div class="form-field">
+                      <label for="name">Name</label>
+                      <input
+                        id="name"
+                        type="text"
+                        placeholder="Jane Doe"
+                        autocomplete="name"
+                      />
+                    </div>
+                    <div class="form-field">
+                      <label for="email">Email</label>
+                      <input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                      />
+                    </div>
+                    <div class="form-field">
+                      <label for="password">Password</label>
+                      <input
+                        id="password"
+                        type="password"
+                        placeholder="••••••••"
+                        autocomplete="current-password"
+                      />
+                    </div>
+                    <div class="form-actions">
+                      <button
+                        type="button"
+                        id="signup-btn"
+                        class="btn primary-btn"
+                      >
+                        Sign Up
+                      </button>
+                      <button
+                        type="button"
+                        id="login-btn"
+                        class="btn secondary-btn"
+                      >
+                        Login
+                      </button>
+                    </div>
+                    <p
+                      id="auth-status"
+                      class="status-text"
+                      aria-live="polite"
+                    ></p>
+                  </form>
+                </section>
+
+                <!-- Feature cards -->
+                <section class="feature-grid">
+                  <article class="glass-card feature-card">
+                    <div class="feature-icon">
+                      <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3>AI Question Generator</h3>
+                    <p>
+                      Generate tailored behavioral and technical interview
+                      questions in one click.
+                    </p>
+                  </article>
+                  <article class="glass-card feature-card">
+                    <div class="feature-icon purple">
+                      <i class="fa-regular fa-file-lines"></i>
+                    </div>
+                    <h3>Resume Analysis</h3>
+                    <p>
+                      Upload your resume and let InterviewGPT highlight key
+                      talking points.
+                    </p>
+                  </article>
+                  <article class="glass-card feature-card">
+                    <div class="feature-icon teal">
+                      <i class="fa-regular fa-comment-dots"></i>
+                    </div>
+                    <h3>Smart Feedback</h3>
+                    <p>
+                      Get structured feedback on your answers with clear
+                      improvement tips.
+                    </p>
+                  </article>
+                  <article class="glass-card feature-card">
+                    <div class="feature-icon amber">
+                      <i class="fa-solid fa-gauge-high"></i>
+                    </div>
+                    <h3>Readiness Tracking</h3>
+                    <p>
+                      Visualize how ready you are with dynamic scores and
+                      progress indicators.
+                    </p>
+                  </article>
+                </section>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. Resume upload section -->
+          <section id="section-resume" class="section">
+            <header class="section-header">
+              <h2>Resume Upload</h2>
+              <p>
+                Drag and drop your resume or upload a file to tailor your
+                practice session.
+              </p>
+            </header>
+
+            <div class="grid-two">
+              <div class="glass-card upload-card">
+                <div
+                  id="resume-dropzone"
+                  class="upload-dropzone"
+                >
+                  <div class="upload-illustration">
+                    <i class="fa-regular fa-cloud-arrow-up"></i>
+                  </div>
+                  <p class="upload-title">Drop your resume here</p>
+                  <p class="upload-subtitle">
+                    PDF, DOC or DOCX &middot; Max 5 MB
+                  </p>
+                  <div class="upload-actions">
+                    <label class="btn ghost-btn file-trigger">
+                      <span>Browse files</span>
+                      <input
+                        type="file"
+                        id="resume-input"
+                        accept=".pdf,.doc,.docx"
+                      />
+                    </label>
+                    <button
+                      id="upload-resume-btn"
+                      class="btn secondary-btn"
+                    >
+                      Upload
+                    </button>
+                  </div>
+                  <p id="uploaded-file-name" class="status-text"></p>
+                  <p
+                    id="resume-success-message"
+                    class="status-pill hidden"
+                  >
+                    <i class="fa-solid fa-check"></i>
+                    <span>Resume uploaded successfully</span>
+                  </p>
+                </div>
+              </div>
+
+              <div class="glass-card upload-side">
+                <h3>How InterviewGPT uses your resume</h3>
+                <ul class="bullet-list">
+                  <li>Identifies key skills and experiences to highlight.</li>
+                  <li>Generates tailored questions based on your profile.</li>
+                  <li>Suggests stronger phrasing for impact.</li>
+                  <li>Helps you connect your story to the role.</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- 5. Interview practice / question generator -->
+          <section id="section-practice" class="section">
+            <header class="section-header">
+              <h2>Interview Question Generator</h2>
+              <p>
+                Practice with realistic interview questions and draft your
+                answers directly in the workspace.
+              </p>
+            </header>
+
+            <div class="glass-card">
+              <button
+                id="generate-questions-btn"
+                class="btn primary-btn full-width"
+              >
+                <i class="fa-regular fa-circle-play"></i>
+                <span>Generate Interview Questions</span>
+              </button>
+
+              <div
+                id="questions-container"
+                class="questions-list hidden"
+              ></div>
+            </div>
+          </section>
+
+          <!-- 6. AI Feedback section -->
+          <section id="section-feedback" class="section">
+            <header class="section-header">
+              <h2>AI Feedback</h2>
+              <p>
+                Analyze your answers and get a quick snapshot of your interview
+                readiness.
+              </p>
+            </header>
+
+            <div class="glass-card">
+              <button
+                id="analyze-btn"
+                class="btn secondary-btn full-width"
+              >
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>Analyze My Answers</span>
+              </button>
+
+              <div
+                id="feedback-container"
+                class="feedback-content hidden"
+              >
+                <div class="feedback-grid">
+                  <div class="feedback-metric">
+                    <div class="metric-top">
+                      <span class="metric-icon blue"
+                        ><i class="fa-regular fa-comments"></i
+                      ></span>
+                      <span class="metric-label">Communication</span>
+                    </div>
+                    <span
+                      class="metric-value"
+                      id="feedback-communication"
+                      >Good</span
+                    >
+                    <div class="metric-bar">
+                      <div
+                        class="metric-bar-fill"
+                        id="metric-bar-communication"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="feedback-metric">
+                    <div class="metric-top">
+                      <span class="metric-icon purple"
+                        ><i class="fa-regular fa-face-smile-beam"></i
+                      ></span>
+                      <span class="metric-label">Confidence</span>
+                    </div>
+                    <span class="metric-value" id="feedback-confidence"
+                      >Needs Improvement</span
+                    >
+                    <div class="metric-bar">
+                      <div
+                        class="metric-bar-fill"
+                        id="metric-bar-confidence"
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div class="feedback-metric">
+                    <div class="metric-top">
+                      <span class="metric-icon teal"
+                        ><i class="fa-solid fa-microchip"></i
+                      ></span>
+                      <span class="metric-label">Technical Explanation</span>
+                    </div>
+                    <span class="metric-value" id="feedback-technical"
+                      >Strong</span
+                    >
+                    <div class="metric-bar">
+                      <div
+                        class="metric-bar-fill"
+                        id="metric-bar-technical"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="feedback-tips">
+                  <h3>Improvement Tips</h3>
+                  <ul>
+                    <li>Add specific project examples for each answer.</li>
+                    <li>Structure responses using the STAR method.</li>
+                    <li>Pause, breathe, and speak with clear confidence.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 7. Progress / readiness dashboard -->
+          <section id="section-progress" class="section">
+            <header class="section-header">
+              <h2>Interview Readiness</h2>
+              <p>
+                Track your overall readiness and see which skills to focus on
+                next.
+              </p>
+            </header>
+
+            <div class="grid-two">
+              <div class="glass-card readiness-main">
+                <div class="readiness-circle">
+                  <div
+                    id="readiness-ring"
+                    class="progress-ring"
+                  >
+                    <div class="progress-ring-inner">
+                      <span id="readiness-score" class="ring-score">20%</span>
+                      <span id="progress-label" class="ring-label"
+                        >Getting started</span
+                      >
+                    </div>
+                  </div>
+                  <div class="readiness-legend">
+                    <div class="legend-item">
+                      <span class="legend-dot primary"></span>
+                      <span>Completed steps</span>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-dot muted"></span>
+                      <span>Remaining practice</span>
+                    </div>
+                    <p class="readiness-note">
+                      Complete resume upload, practice questions, and run AI
+                      feedback to reach 100%.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="glass-card readiness-skills">
+                <h3>Skill Breakdown</h3>
+                <div class="skill-row">
+                  <div class="skill-header">
+                    <span>Communication</span>
+                    <span id="skill-score-communication">40%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div
+                      id="skill-bar-communication"
+                      class="skill-bar-fill"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill-row">
+                  <div class="skill-header">
+                    <span>Confidence</span>
+                    <span id="skill-score-confidence">35%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div
+                      id="skill-bar-confidence"
+                      class="skill-bar-fill"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill-row">
+                  <div class="skill-header">
+                    <span>Technical Depth</span>
+                    <span id="skill-score-technical">45%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div
+                      id="skill-bar-technical"
+                      class="skill-bar-fill"
+                    ></div>
+                  </div>
+                </div>
+                <div class="skill-row">
+                  <div class="skill-header">
+                    <span>Storytelling</span>
+                    <span id="skill-score-storytelling">30%</span>
+                  </div>
+                  <div class="skill-bar">
+                    <div
+                      id="skill-bar-storytelling"
+                      class="skill-bar-fill"
+                    ></div>
+                  </div>
+                </div>
+                <p class="readiness-note small">
+                  These scores are simulated for demo purposes. Use them as a
+                  guide to where you might want to focus.
+                </p>
+                <div class="linear-progress-wrapper">
+                  <div class="linear-label">
+                    <span>Overall readiness</span>
+                    <span id="progress-percent">20%</span>
+                  </div>
+                  <div class="linear-progress">
+                    <div
+                      id="readiness-progress"
+                      class="linear-progress-fill"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
